@@ -102,14 +102,11 @@
   justify-content: center;
 
   .container {
-    border-radius: 10px;
-    width: 65%;
-    height: 80%;
+    max-width: 1140px;
+    height: 100%;
     display: flex;
     overflow: hidden;
-    @include tablet {
-      width: 90%;
-    }
+
 
     .sidebar {
       flex: 1;
