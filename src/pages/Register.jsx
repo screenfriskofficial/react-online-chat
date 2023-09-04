@@ -83,7 +83,7 @@ export const Register = () => {
           {err && <span>Something went wrong </span>}
         </form>
 
-        <p>You do have and account?<Link to={'/register'}>Login</Link> </p>
+        <p>You do have and account?<Link to={'/login'}>Login</Link> </p>
       </div>
     </div>
   );
