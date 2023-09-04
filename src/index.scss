@@ -312,6 +312,10 @@
           align-items: center;
           gap: 10px;
 
+          label {
+            display: flex;
+          }
+
           img {
             height: 24px;
             cursor: pointer;

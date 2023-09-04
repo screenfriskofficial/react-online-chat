@@ -1,5 +1,3 @@
-import Add from "../img/addAvatar.png";
-
 export const Login = () => {
   return (
     <div className={"formContainer"}>
