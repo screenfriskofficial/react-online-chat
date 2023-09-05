@@ -73,6 +73,11 @@ export const Input = () => {
     setText("");
     setImg(null);
   };
+
+  const handleDown = (e) => {
+    e.code === "Enter" && handleSend();
+  };
+
   return (
     <div className="input">
       <input
@@ -80,6 +85,7 @@ export const Input = () => {
         placeholder="Type something..."
         onChange={(e) => setText(e.target.value)}
         value={text}
+        onKeyDown={handleDown}
       />
       <div className="send">
         <img src={Attach} alt="" />

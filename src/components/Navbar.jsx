@@ -1,23 +1,10 @@
 import { useContext } from "react";
 import { signOut } from "firebase/auth";
-import { auth } from "../firebase.js";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext.jsx";
+import { auth } from "../firebase.js";
 
 export const Navbar = () => {
-  const navigate = useNavigate();
-
   const { currentUser } = useContext(AuthContext);
-
-  const handleLogout = async () => {
-    await signOut(auth)
-      .then(() => {
-        navigate("/login");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   return (
     <div className="navbar">
@@ -26,7 +13,7 @@ export const Navbar = () => {
         <div className="user">
           <img src={currentUser.photoURL} alt="" />
           <span>{currentUser.displayName}</span>
-          <button onClick={handleLogout}>logout</button>
+          <button onClick={() => signOut(auth)}>logout</button>
         </div>
       )}
     </div>
