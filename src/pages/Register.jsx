@@ -1,10 +1,11 @@
 import Add from "../img/addAvatar.png";
-import { createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
-import {auth,storage,db} from "../firebase.js";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, storage, db } from "../firebase.js";
 import React from "react";
-import {ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
-import {useNavigate,Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 export const Register = () => {
   const [err, setErr] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -58,7 +59,6 @@ export const Register = () => {
     }
   };
 
-
   return (
     <div className={"formContainer"}>
       <div className={"formWrapper"}>
@@ -79,11 +79,13 @@ export const Register = () => {
             <span>Add an avatar</span>
           </label>
           <button>Sign up</button>
-          {loading && 'Uploading and compressing the image please wait...'}
+          {loading && "Uploading and compressing the image please wait..."}
           {err && <span>Something went wrong </span>}
         </form>
 
-        <p>You do have and account?<Link to={'/login'}>Login</Link> </p>
+        <p>
+          You do have and account? <Link to={"/login"}>Login</Link>
+        </p>
       </div>
     </div>
   );

@@ -1,20 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
-*{
+
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
 @mixin mobile {
   @media screen and (max-width: 480px) {
     @content;
   }
 }
+
 @mixin tablet {
   @media screen and (max-width: 768px) {
     @content;
   }
 }
+
 @mixin laptop {
   @media screen and (max-width: 1200px) {
     @content;
@@ -36,6 +40,7 @@
     flex-direction: column;
     gap: 10px;
     align-items: center;
+    box-shadow: 10px 10px 30px 0 rgba(0, 0, 0, 0.2);
 
     .logo {
       color: #5d5b8d;
@@ -54,11 +59,18 @@
       flex-direction: column;
       gap: 15px;
 
+
       input {
         padding: 15px;
         border: none;
-        width: 250px;
+        outline: none;
+        width: 100%;
         border-bottom: 1px solid #a7bcff;
+
+        &:focus {
+          border-bottom: 1px solid #5d5b8d;
+        }
+
         &::placeholder {
           color: rgb(175, 175, 175);
         }
@@ -71,6 +83,11 @@
         font-weight: bold;
         border: none;
         cursor: pointer;
+        transition: .25s ease-in-out;
+
+        &:hover {
+          background-color: #8da4f1;
+        }
       }
 
       label {
@@ -86,6 +103,7 @@
         }
       }
     }
+
     p {
       color: #5d5b8d;
       font-size: 12px;
@@ -101,11 +119,13 @@
   align-items: center;
   justify-content: center;
 
+
   .container {
     max-width: 1140px;
     height: 100%;
     display: flex;
     overflow: hidden;
+    box-shadow: 10px 10px 30px 0 rgba(0, 0, 0, 0.2);
 
 
     .sidebar {
@@ -147,6 +167,12 @@
             font-size: 10px;
             border: none;
             cursor: pointer;
+            transition: .25s ease-in-out;
+
+            &:hover {
+              background-color: #3e3c61;
+            }
+
             @include tablet {
               position: absolute;
               bottom: 10px;
@@ -154,6 +180,7 @@
           }
         }
       }
+
       .search {
         border-bottom: 1px solid gray;
 
@@ -197,6 +224,7 @@
             font-size: 18px;
             font-weight: 500;
           }
+
           p {
             font-size: 14px;
             color: lightgray;
@@ -204,6 +232,7 @@
         }
       }
     }
+
     .chat {
       flex: 2;
 
@@ -251,6 +280,7 @@
               object-fit: cover;
             }
           }
+
           .messageContent {
             max-width: 80%;
             display: flex;
@@ -274,6 +304,7 @@
 
             .messageContent {
               align-items: flex-end;
+
               p {
                 background-color: #8da4f1;
                 color: white;
