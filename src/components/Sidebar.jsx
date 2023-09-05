@@ -1,4 +1,4 @@
-import Chats from "./Chats.jsx";
+import { Chats } from "./Chats.jsx";
 import { Search } from "./Search.jsx";
 import { Navbar } from "./Navbar.jsx";
 
