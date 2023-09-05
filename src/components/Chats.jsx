@@ -11,6 +11,7 @@ export const Chats = () => {
   const { dispatch } = useContext(ChatContext);
 
   useEffect(() => {
+    // Получаю все чаты
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
         setChats(doc.data());
