@@ -15,6 +15,7 @@ export const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         navigate("/");
+        location.reload();
       })
       .catch((err) => {
         console.log(err);
