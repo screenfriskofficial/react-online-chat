@@ -107,7 +107,7 @@ export const Search = () => {
           </div>
         </div>
       )}
-      <Divider sx={{ border: "1px solid #2f2d52" }} />
+      <Divider sx={{ border: "1px solid #ced4da" }} />
     </div>
   );
 };

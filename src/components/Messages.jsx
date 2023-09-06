@@ -1,11 +1,12 @@
 import { doc, onSnapshot } from "firebase/firestore";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ChatContext } from "../context/ChatContext";
 import { db } from "../firebase";
 import { Message } from "./Message";
 
 export const Messages = () => {
   const [messages, setMessages] = useState([]);
+
   const { data } = useContext(ChatContext);
 
   // если пользователь существует в коллекции, то тогда можно отправлять сообщение
@@ -13,7 +14,6 @@ export const Messages = () => {
     const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
     });
-
     return () => {
       unSub();
     };
