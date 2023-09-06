@@ -1,9 +1,11 @@
-import { useContext } from "react";
-import { Register } from "./pages/Register.jsx";
-import { Login } from "./pages/Login.jsx";
-import { Home } from "./pages/Home.jsx";
+import { lazy, useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext.jsx";
+import { Loadable } from "./ui/Loadable.jsx";
+
+const HomePage = Loadable(lazy(() => import("./pages/Home.jsx")));
+const LoginPage = Loadable(lazy(() => import("./pages/Login.jsx")));
+const RegisterPage = Loadable(lazy(() => import("./pages/Register.jsx")));
 
 const App = () => {
   const { currentUser } = useContext(AuthContext);
@@ -22,12 +24,12 @@ const App = () => {
           index
           element={
             <ProtectedRoute>
-              <Home />
+              <HomePage />
             </ProtectedRoute>
           }
         />
-        <Route path={"login"} element={<Login />} />
-        <Route path={"register"} element={<Register />} />
+        <Route path={"login"} element={<LoginPage />} />
+        <Route path={"register"} element={<RegisterPage />} />
       </Route>
     </Routes>
   );

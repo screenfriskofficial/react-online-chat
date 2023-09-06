@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
-import Img from "../img/img.png";
-import Attach from "../img/attach.png";
+import { useContext, useState } from "react";
+import SendIcon from "@mui/icons-material/Send";
+import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import {
@@ -13,6 +13,7 @@ import {
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { Button } from "@mui/material";
 
 export const Input = () => {
   const [text, setText] = useState("");
@@ -21,7 +22,11 @@ export const Input = () => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
+  const haveText = text.length > 0 || img;
+
   const handleSend = async () => {
+    setText("");
+    setImg(null);
     if (img) {
       const storageRef = ref(storage, uuid());
 
@@ -29,7 +34,7 @@ export const Input = () => {
 
       uploadTask.on(
         (error) => {
-          //TODO:Handle Error
+          console.error(error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
@@ -69,13 +74,12 @@ export const Input = () => {
       },
       [data.chatId + ".date"]: serverTimestamp(),
     });
-
-    setText("");
-    setImg(null);
   };
 
   const handleDown = (e) => {
-    e.code === "Enter" && handleSend();
+    if (haveText) {
+      e.code === "Enter" && handleSend();
+    }
   };
 
   return (
@@ -95,9 +99,31 @@ export const Input = () => {
           onChange={(e) => setImg(e.target.files[0])}
         />
         <label htmlFor="file">
-          <img src={Img} alt="" />
+          <PhotoSizeSelectActualIcon
+            fontSize={"medium"}
+            sx={{
+              color: "#a7bcff",
+              ":hover": { color: "#3e3c61" },
+              cursor: "pointer",
+            }}
+          />
         </label>
-        <button onClick={handleSend}>Send</button>
+        {haveText ? (
+          <Button
+            onClick={handleSend}
+            sx={{
+              color: "#a7bcff",
+              ":hover": { color: "#3e3c61" },
+              cursor: "pointer",
+            }}
+          >
+            <SendIcon fontSize={"medium"} />
+          </Button>
+        ) : (
+          <Button disabled>
+            <SendIcon fontSize={"medium"} />
+          </Button>
+        )}
       </div>
     </div>
   );

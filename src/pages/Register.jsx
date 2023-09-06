@@ -5,15 +5,17 @@ import React from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
+import { Button, CircularProgress, TextField } from "@mui/material";
 
-export const Register = () => {
+const Register = () => {
   const [err, setErr] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
+  const [loader, setLoader] = React.useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    setLoading(true);
+    setLoader(true);
     e.preventDefault();
+
     const displayName = e.target[0].value;
     const email = e.target[1].value;
     const password = e.target[2].value;
@@ -50,13 +52,13 @@ export const Register = () => {
           } catch (err) {
             console.log(err);
             setErr(true);
-            setLoading(false);
+            setLoader(false);
           }
         });
       });
     } catch (err) {
       setErr(true);
-      setLoading(false);
+      setLoader(false);
     }
   };
 
@@ -66,9 +68,9 @@ export const Register = () => {
         <span className={"logo"}>Chat</span>
         <span className={"title"}>Register</span>
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder={"display name"} />
-          <input type="email" placeholder={"email"} />
-          <input type="password" placeholder={"password"} />
+          <TextField variant={"standard"} label={"Login"} type="text" />
+          <TextField variant={"standard"} label={"Email"} type="email" />
+          <TextField variant={"standard"} label={"Password"} type="password" />
           <input
             style={{ display: "none" }}
             type="file"
@@ -79,9 +81,9 @@ export const Register = () => {
             <img src={Add} alt="add" />
             <span>Add an avatar</span>
           </label>
-          <button>Sign up</button>
-          {loading && "Uploading and compressing the image please wait..."}
-          {err && <span>Something went wrong </span>}
+          {loader && <CircularProgress />}
+          {err && "Something went wrong"}
+          <button>Sign Up</button>
         </form>
 
         <p>
@@ -91,3 +93,4 @@ export const Register = () => {
     </div>
   );
 };
+export default Register;

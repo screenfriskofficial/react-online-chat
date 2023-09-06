@@ -13,6 +13,7 @@ import {
 import userImg from "../img/user.jfif";
 import { db } from "../firebase.js";
 import { AuthContext } from "../context/AuthContext.jsx";
+import { createTheme, Divider, TextField, ThemeProvider } from "@mui/material";
 
 export const Search = () => {
   const [username, setUsername] = useState("");
@@ -84,7 +85,10 @@ export const Search = () => {
   return (
     <div className="search">
       <div className="searchForm">
-        <input
+        <TextField
+          label="Find your friends"
+          fullWidth
+          variant={"outlined"}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           type="text"
@@ -103,6 +107,7 @@ export const Search = () => {
           </div>
         </div>
       )}
+      <Divider sx={{ border: "1px solid #2f2d52" }} />
     </div>
   );
 };

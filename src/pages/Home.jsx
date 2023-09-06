@@ -1,7 +1,7 @@
 import { Sidebar } from "../components/Sidebar.jsx";
 import { Chat } from "../components/Chat.jsx";
 
-export const Home = () => {
+const Home = () => {
   return (
     <div className="home">
       <div className="container">
@@ -11,3 +11,4 @@ export const Home = () => {
     </div>
   );
 };
+export default Home;

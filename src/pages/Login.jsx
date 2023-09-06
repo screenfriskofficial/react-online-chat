@@ -2,8 +2,9 @@ import { auth } from "../firebase.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
+import { Button, CircularProgress, TextField } from "@mui/material";
 
-export const Login = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [err, setError] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
@@ -29,10 +30,10 @@ export const Login = () => {
         <span className={"logo"}>Chat</span>
         <span className={"title"}>Login</span>
         <form onSubmit={handleSubmit}>
-          <input type="email" placeholder={"email"} />
-          <input type="password" placeholder={"password"} />
+          <TextField variant={"standard"} label={"Email"} type="email" />
+          <TextField variant={"standard"} label={"Password"} type="password" />
+          {loader && <CircularProgress />}
           {err && "Something went wrong"}
-          {loader && "loading..."}
           <button>Sign in</button>
         </form>
         <p>
@@ -42,3 +43,4 @@ export const Login = () => {
     </div>
   );
 };
+export default Login;
