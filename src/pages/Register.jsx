@@ -5,7 +5,7 @@ import React from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
-import { Button, CircularProgress, TextField } from "@mui/material";
+import { CircularProgress, TextField } from "@mui/material";
 
 const Register = () => {
   const [err, setErr] = React.useState(false);

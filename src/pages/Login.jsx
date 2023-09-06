@@ -2,7 +2,7 @@ import { auth } from "../firebase.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
-import { Button, CircularProgress, TextField } from "@mui/material";
+import { CircularProgress, TextField } from "@mui/material";
 
 const Login = () => {
   const navigate = useNavigate();

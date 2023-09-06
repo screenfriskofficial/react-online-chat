@@ -23,6 +23,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </BrowserRouter>
       </ChatContextProvider>
     </AuthContextProvider>
-    ,
   </ThemeProvider>,
 );
