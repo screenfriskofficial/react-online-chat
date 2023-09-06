@@ -1,12 +1,19 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
+import { updateProfile } from "firebase/auth";
 import SendIcon from "@mui/icons-material/Send";
 import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
+import { auth } from "../firebase.js";
+import { TypeAnimation } from "react-type-animation";
 import {
   arrayUnion,
   doc,
+  collection,
+  getDoc,
+  onSnapshot,
   serverTimestamp,
+  setDoc,
   Timestamp,
   updateDoc,
 } from "firebase/firestore";
@@ -21,12 +28,39 @@ export const Input = () => {
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
+  const [isTyping, setIsTyping] = useState(false);
+  const [inputFocused, setInputFocused] = useState(false);
 
   const haveText = text.length > 0 || img;
+
+  const inputRef = useRef(null);
+
+  console.log(data);
+
+  useEffect(() => {
+    const docRef = doc(db, "users", currentUser.uid);
+
+    const unsubscribe = onSnapshot(docRef, (docSnap) => {
+      const userData = docSnap.data();
+      if (userData && userData.typing !== undefined) {
+        setIsTyping(userData.typing);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [currentUser.uid]);
 
   const handleSend = async () => {
     setText("");
     setImg(null);
+    await updateDoc(doc(db, "users", data.user.uid), {
+      typing: false, // Устанавливаем 'false' при отправке сообщения
+    });
+
+    if (inputFocused) {
+      inputRef.current.blur();
+    }
+
     if (img) {
       const storageRef = ref(storage, uuid());
 
@@ -76,55 +110,79 @@ export const Input = () => {
     });
   };
 
-  const handleDown = (e) => {
+  const handleDown = async (e) => {
     if (haveText) {
       e.code === "Enter" && handleSend();
     }
   };
 
   return (
-    <div className="input">
-      <input
-        type="text"
-        placeholder="Type something..."
-        onChange={(e) => setText(e.target.value)}
-        value={text}
-        onKeyDown={handleDown}
-      />
-      <div className="send">
+    <>
+      <div className="input">
+        {isTyping ? (
+          <span>
+            <TypeAnimation
+              className={"typing-indicator"}
+              sequence={[" ", 250, ".", 250, "..", 250, "...", 250]}
+              repeat={Infinity}
+            />
+          </span>
+        ) : null}
         <input
-          type="file"
-          style={{ display: "none" }}
-          id="file"
-          onChange={(e) => setImg(e.target.files[0])}
+          ref={inputRef}
+          type="text"
+          placeholder="Type something..."
+          onChange={(e) => setText(e.target.value)}
+          value={text}
+          onKeyDown={handleDown}
+          onFocus={() => {
+            setInputFocused(true);
+            updateDoc(doc(db, "users", data.user.uid), {
+              typing: true,
+            });
+          }}
+          onBlur={() => {
+            setInputFocused(false);
+            updateDoc(doc(db, "users", data.user.uid), {
+              typing: false,
+            });
+          }}
         />
-        <label htmlFor="file">
-          <PhotoSizeSelectActualIcon
-            fontSize={"medium"}
-            sx={{
-              color: "#a7bcff",
-              ":hover": { color: "#3e3c61" },
-              cursor: "pointer",
-            }}
+        <div className="send">
+          <input
+            type="file"
+            style={{ display: "none" }}
+            id="file"
+            onChange={(e) => setImg(e.target.files[0])}
           />
-        </label>
-        {haveText ? (
-          <Button
-            onClick={handleSend}
-            sx={{
-              color: "#a7bcff",
-              ":hover": { color: "#3e3c61" },
-              cursor: "pointer",
-            }}
-          >
-            <SendIcon fontSize={"medium"} />
-          </Button>
-        ) : (
-          <Button disabled>
-            <SendIcon fontSize={"medium"} />
-          </Button>
-        )}
+          <label htmlFor="file">
+            <PhotoSizeSelectActualIcon
+              fontSize={"medium"}
+              sx={{
+                color: "#a7bcff",
+                ":hover": { color: "#3e3c61" },
+                cursor: "pointer",
+              }}
+            />
+          </label>
+          {haveText ? (
+            <Button
+              onClick={handleSend}
+              sx={{
+                color: "#a7bcff",
+                ":hover": { color: "#3e3c61" },
+                cursor: "pointer",
+              }}
+            >
+              <SendIcon fontSize={"medium"} />
+            </Button>
+          ) : (
+            <Button disabled>
+              <SendIcon fontSize={"medium"} />
+            </Button>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };

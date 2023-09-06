@@ -378,6 +378,16 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        position: relative;
+
+        .typing-indicator {
+          position: absolute;
+          top: -50px;
+          background-color: #fff;
+          font-size: 24px;
+          padding: 0 10px;
+          border-radius: 15px;
+        }
 
         input {
           width: 100%;

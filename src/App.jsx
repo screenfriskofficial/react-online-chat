@@ -9,7 +9,7 @@ const RegisterPage = Loadable(lazy(() => import("./pages/Register.jsx")));
 
 const App = () => {
   const { currentUser } = useContext(AuthContext);
-
+  // TODO: Create validate
   // eslint-disable-next-line react/prop-types
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {

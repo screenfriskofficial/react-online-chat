@@ -61,6 +61,7 @@ export const Search = () => {
             uid: user.uid,
             displayName: user.displayName,
             photoURL: user.photoURL,
+            typing: false,
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
@@ -70,6 +71,7 @@ export const Search = () => {
             uid: currentUser.uid,
             displayName: currentUser.displayName,
             photoURL: currentUser.photoURL,
+            typing: false,
           },
           [combinedId + ".date"]: serverTimestamp(),
         });

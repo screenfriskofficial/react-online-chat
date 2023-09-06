@@ -9,7 +9,6 @@ export const Messages = () => {
 
   const { data } = useContext(ChatContext);
 
-  // если пользователь существует в коллекции, то тогда можно отправлять сообщение
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
