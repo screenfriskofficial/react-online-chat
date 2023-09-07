@@ -45,7 +45,7 @@ const Login = () => {
         <form onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
-            error={formik.touched.email && formik.errors.email}
+            error={Boolean(formik.errors.email)}
             helperText={formik.errors.email || null}
             id={"email"}
             name={"email"}
@@ -58,7 +58,7 @@ const Login = () => {
 
           <TextField
             fullWidth
-            error={formik.touched.password && formik.errors.password}
+            error={Boolean(formik.errors.password)}
             helperText={formik.errors.password || null}
             id={"password"}
             name={"password"}

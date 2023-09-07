@@ -11,9 +11,6 @@ const customTheme = createTheme({
     primary: {
       main: "#a7bcff",
     },
-    error: {
-      main: "#f44336",
-    },
   },
 });
 

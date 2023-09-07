@@ -76,7 +76,7 @@ const Register = () => {
         <form onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
-            error={formik.touched.displayName && formik.errors.displayName}
+            error={Boolean(formik.errors.displayName)}
             helperText={formik.errors.displayName || null}
             id={"displayName"}
             name={"displayName"}
@@ -88,7 +88,7 @@ const Register = () => {
           />
           <TextField
             fullWidth
-            error={formik.touched.email && formik.errors.email}
+            error={Boolean(formik.errors.email)}
             helperText={formik.errors.email || null}
             id={"email"}
             name={"email"}
@@ -100,7 +100,7 @@ const Register = () => {
           />
           <TextField
             fullWidth
-            error={formik.touched.password && formik.errors.password}
+            error={Boolean(formik.errors.password)}
             helperText={formik.errors.password || null}
             id={"password"}
             name={"password"}
@@ -112,8 +112,7 @@ const Register = () => {
           />
           <TextField
             fullWidth
-            error={formik.touched.file && formik.errors.file}
-            helperText={formik.errors.file || null}
+            error={Boolean(formik.errors.file)}
             id={"file"}
             name={"file"}
             onChange={formik.handleChange}
@@ -125,6 +124,7 @@ const Register = () => {
           <label htmlFor="file">
             <img src={Add} alt="add" />
             <span>Add an avatar</span>
+            <div className={"error"}>{formik.errors.file}</div>
           </label>
           {loader && <CircularProgress />}
           <button>Sign Up</button>
