@@ -4,7 +4,13 @@ import { CircularProgress } from "@mui/material";
 export const Loadable = (Component) => {
   return function fn(props) {
     return (
-      <Suspense fallback={<CircularProgress />}>
+      <Suspense
+        fallback={
+          <div className="loader">
+            <CircularProgress />
+          </div>
+        }
+      >
         <Component {...props} />
       </Suspense>
     );

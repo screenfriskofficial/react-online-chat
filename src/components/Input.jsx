@@ -35,8 +35,6 @@ export const Input = () => {
 
   const inputRef = useRef(null);
 
-  console.log(data);
-
   useEffect(() => {
     const docRef = doc(db, "users", currentUser.uid);
 
