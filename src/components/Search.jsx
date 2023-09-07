@@ -11,7 +11,7 @@ import {
   getDoc,
 } from "firebase/firestore";
 import userImg from "../img/user.jfif";
-import { db } from "../firebase.js";
+import { db } from "../app/firebase.js";
 import { AuthContext } from "../context/AuthContext.jsx";
 import { createTheme, Divider, TextField, ThemeProvider } from "@mui/material";
 

@@ -4,7 +4,7 @@ import SendIcon from "@mui/icons-material/Send";
 import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
-import { auth } from "../firebase.js";
+import { auth } from "../app/firebase.js";
 import { TypeAnimation } from "react-type-animation";
 import {
   arrayUnion,
@@ -17,7 +17,7 @@ import {
   Timestamp,
   updateDoc,
 } from "firebase/firestore";
-import { db, storage } from "../firebase";
+import { db, storage } from "../app/firebase.js";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { Button } from "@mui/material";

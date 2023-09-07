@@ -1,7 +1,7 @@
 import { doc, onSnapshot } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { ChatContext } from "../context/ChatContext";
-import { db } from "../firebase";
+import { db } from "../app/firebase.js";
 import { Message } from "./Message";
 
 export const Messages = () => {

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { signOut } from "firebase/auth";
 import { AuthContext } from "../context/AuthContext.jsx";
-import { auth } from "../firebase.js";
+import { auth } from "../app/firebase.js";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { IconButton } from "@mui/material";
 import ToggleOffIcon from "@mui/icons-material/ToggleOff";

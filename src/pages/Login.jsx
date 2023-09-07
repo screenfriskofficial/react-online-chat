@@ -1,4 +1,4 @@
-import { auth } from "../firebase.js";
+import { auth } from "../app/firebase.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";

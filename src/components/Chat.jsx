@@ -15,7 +15,10 @@ export const Chat = () => {
       {hasChat ? (
         <div className="chat">
           <div className="chatInfo">
-            <span>{data.user?.displayName}</span>
+            <div className="currentUser">
+              <img src={data.user?.photoURL} alt="" />
+              <span>{data.user?.displayName}</span>
+            </div>
           </div>
           <Messages />
           <Input />

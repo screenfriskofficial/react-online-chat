@@ -2,13 +2,15 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
-import { db } from "../firebase";
+import { db } from "../app/firebase.js";
+import { redirect, useNavigate } from "react-router-dom";
 
 export const Chats = () => {
   const [chats, setChats] = useState([]);
 
   const { currentUser } = useContext(AuthContext);
-  const { dispatch } = useContext(ChatContext);
+  const { dispatch, data } = useContext(ChatContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Получаю все чаты
@@ -26,6 +28,7 @@ export const Chats = () => {
   }, [currentUser.uid]);
 
   const handleSelect = (u) => {
+    navigate("/");
     dispatch({ type: "CHANGE_USER", payload: u });
   };
 
