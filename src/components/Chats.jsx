@@ -3,13 +3,13 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import { db } from "../app/firebase.js";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Chats = () => {
   const [chats, setChats] = useState([]);
 
   const { currentUser } = useContext(AuthContext);
-  const { dispatch, data } = useContext(ChatContext);
+  const { dispatch } = useContext(ChatContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export const Chats = () => {
     };
 
     currentUser.uid && getChats();
-  }, [currentUser.uid]);
+  }, [currentUser?.uid]);
 
   const handleSelect = (u) => {
     navigate("/");
