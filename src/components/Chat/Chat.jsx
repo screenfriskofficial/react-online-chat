@@ -1,9 +1,10 @@
 import { useContext } from "react";
 
-import { Messages } from "./Messages";
-import { Input } from "./Input";
-import { ChatContext } from "../context/ChatContext";
-import { NoChat } from "./NoChat.jsx";
+import { Messages } from "../Messages/Messages.jsx";
+import { Input } from "../Input/Input.jsx";
+import { ChatContext } from "../../context/ChatContext.jsx";
+import { NoChat } from "../NoChat/NoChat.jsx";
+import classes from "./Chat.module.scss";
 
 export const Chat = () => {
   const { data } = useContext(ChatContext);
@@ -13,9 +14,9 @@ export const Chat = () => {
   return (
     <>
       {hasChat ? (
-        <div className="chat">
-          <div className="chatInfo">
-            <div className="currentUser">
+        <div className={classes.chat}>
+          <div className={classes.chatInfo}>
+            <div className={classes.currentUser}>
               <img src={data.user?.photoURL} alt="" />
               <span>{data.user?.displayName}</span>
             </div>

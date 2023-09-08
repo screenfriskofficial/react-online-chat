@@ -1,0 +1,15 @@
+.chats_folder {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 2px solid #ced4da;
+  gap: 10px;
+
+
+  &:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,31 @@
+.search {
+  .searchForm {
+    padding: 10px;
+
+    input {
+      color: #ccc;
+    }
+  }
+
+  .userSearchCard {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 500;
+
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+
+    }
+
+    &:hover {
+      background-color: #e9ecef;
+      cursor: pointer;
+    }
+  }
+}
+

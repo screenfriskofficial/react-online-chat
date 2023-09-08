@@ -15,7 +15,7 @@ const Login = () => {
       email: "",
       password: "",
     },
-    validationSchema: Yup.object({
+    validationSchema: Yup.object().shape({
       email: Yup.string()
         .email("Неверный формат email")
         .required("Обязательное поле"),

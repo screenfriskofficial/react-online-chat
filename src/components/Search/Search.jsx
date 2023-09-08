@@ -10,10 +10,10 @@ import {
   doc,
   getDoc,
 } from "firebase/firestore";
-import userImg from "../img/user.jfif";
-import { db } from "../app/firebase.js";
-import { AuthContext } from "../context/AuthContext.jsx";
-import { createTheme, Divider, TextField, ThemeProvider } from "@mui/material";
+import { db } from "../../app/firebase.js";
+import { AuthContext } from "../../context/AuthContext.jsx";
+import { TextField } from "@mui/material";
+import classes from "./Search.module.scss";
 
 export const Search = () => {
   const [username, setUsername] = useState("");
@@ -85,8 +85,8 @@ export const Search = () => {
   };
 
   return (
-    <div className="search">
-      <div className="searchForm">
+    <div className={classes.search}>
+      <div className={classes.searchForm}>
         <TextField
           label="Find your friends"
           fullWidth
@@ -102,14 +102,17 @@ export const Search = () => {
       {err && "something went wrong"}
 
       {user && (
-        <div className="userChat" key={user.uid} onClick={handleSelect}>
-          <img src={user.photoURL || userImg} alt="" />
+        <div
+          className={classes.userSearchCard}
+          key={user.uid}
+          onClick={handleSelect}
+        >
+          <img src={user.photoURL} alt="" />
           <div className="userChatInfo">
             <span>{user.displayName}</span>
           </div>
         </div>
       )}
-      <Divider sx={{ border: "1px solid #ced4da" }} />
     </div>
   );
 };

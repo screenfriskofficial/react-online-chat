@@ -1,0 +1,42 @@
+.chat {
+
+  width: 100%;
+
+  .chatInfo {
+    height: 50px;
+    background-color: #1d3557;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    color: lightgray;
+
+    .currentUser {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+
+      img {
+        background-color: #ddddf7;
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .chatIcons {
+    display: flex;
+    gap: 10px;
+
+    img {
+      height: 24px;
+      cursor: pointer;
+    }
+  }
+
+
+}

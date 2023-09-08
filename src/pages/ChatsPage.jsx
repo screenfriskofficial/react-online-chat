@@ -1,5 +1,4 @@
-import React from "react";
-import { Chats } from "../components/Chats.jsx";
+import { Chats } from "../components/Chats/Chats.jsx";
 
 const ChatsPage = () => {
   return (

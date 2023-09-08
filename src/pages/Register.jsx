@@ -12,6 +12,7 @@ import * as Yup from "yup";
 const Register = () => {
   const [loader, setLoader] = React.useState(false);
   const navigate = useNavigate();
+  const fileInputRef = React.useRef(null);
 
   const formik = useFormik({
     initialValues: {
@@ -20,7 +21,7 @@ const Register = () => {
       password: "",
       file: "",
     },
-    validationSchema: Yup.object({
+    validationSchema: Yup.object().shape({
       displayName: Yup.string()
         .min(4, "Ваш логин должен содержать минимум 4 символов")
         .required("Обязательное поле"),
@@ -30,15 +31,18 @@ const Register = () => {
       password: Yup.string()
         .min(6, "Ваш пароль должен содержать минимум 6 символов")
         .required("Обязательное поле"),
-      file: Yup.string().required("Загрузите фото!"),
+      file: Yup.string(),
     }),
     onSubmit: async (values) => {
-      const { displayName, email, password, file } = values;
+      const { displayName, email, password } = values;
+      const file = fileInputRef.current.files[0];
+
       setLoader(true);
       try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         const date = new Date().getTime();
         const storageRef = ref(storage, `${displayName + date}`);
+
         await uploadBytesResumable(storageRef, file).then(() => {
           getDownloadURL(storageRef).then(async (downloadURL) => {
             try {
@@ -110,13 +114,10 @@ const Register = () => {
             label={"Password"}
             type="password"
           />
-          <TextField
-            fullWidth
-            error={Boolean(formik.errors.file)}
+          <input
+            ref={fileInputRef}
             id={"file"}
             name={"file"}
-            onChange={formik.handleChange}
-            value={formik.values.file}
             style={{ display: "none" }}
             type="file"
             placeholder={"file"}
@@ -124,7 +125,6 @@ const Register = () => {
           <label htmlFor="file">
             <img src={Add} alt="add" />
             <span>Add an avatar</span>
-            <div className={"error"}>{formik.errors.file}</div>
           </label>
           {loader && <CircularProgress />}
           <button>Sign Up</button>

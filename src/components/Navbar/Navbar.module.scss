@@ -1,0 +1,30 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #1d3557;
+  height: 50px;
+  padding: 10px;
+  justify-content: space-between;
+  color: #ddddf7;
+
+
+  .logo {
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .user {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    img {
+      background-color: #ddddf7;
+      height: 24px;
+      width: 24px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+  }
+}

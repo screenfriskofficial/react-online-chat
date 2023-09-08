@@ -1,26 +1,22 @@
 import { useContext, useState, useEffect, useRef } from "react";
-import { updateProfile } from "firebase/auth";
 import SendIcon from "@mui/icons-material/Send";
 import PhotoSizeSelectActualIcon from "@mui/icons-material/PhotoSizeSelectActual";
-import { AuthContext } from "../context/AuthContext";
-import { ChatContext } from "../context/ChatContext";
-import { auth } from "../app/firebase.js";
+import { AuthContext } from "../../context/AuthContext.jsx";
+import { ChatContext } from "../../context/ChatContext.jsx";
 import { TypeAnimation } from "react-type-animation";
 import {
   arrayUnion,
   doc,
-  collection,
-  getDoc,
   onSnapshot,
   serverTimestamp,
-  setDoc,
   Timestamp,
   updateDoc,
 } from "firebase/firestore";
-import { db, storage } from "../app/firebase.js";
+import { db, storage } from "../../app/firebase.js";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { Button } from "@mui/material";
+import classes from "./Input.module.scss";
 
 export const Input = () => {
   const [text, setText] = useState("");
@@ -116,11 +112,11 @@ export const Input = () => {
 
   return (
     <>
-      <div className="input">
+      <div className={classes.input}>
         {isTyping ? (
           <span>
             <TypeAnimation
-              className={"typing-indicator"}
+              className={classes.typingIndicator}
               sequence={[" ", 250, ".", 250, "..", 250, "...", 250]}
               repeat={Infinity}
             />
@@ -146,7 +142,7 @@ export const Input = () => {
             });
           }}
         />
-        <div className="send">
+        <div className={classes.send}>
           <input
             type="file"
             style={{ display: "none" }}
