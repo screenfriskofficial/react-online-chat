@@ -11,8 +11,6 @@ export const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  console.log(currentUser.photoURL);
-
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
